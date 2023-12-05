@@ -3,13 +3,14 @@ version: '3.3'
 services:
   traefik:
     image: traefik
-    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG
+    command: --web --docker --docker.domain=docker.localhost --logLevel=DEBUG --configFile=/traefik.toml
     ports:
       - "80:80"
       - "8080:8080"
       - "443:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+      - /home/admin/traefik.toml:/traefik.toml
     networks:
       - webgateway
 
