@@ -8,7 +8,7 @@ mkdir -p /srv/wordpress/db
 mkdir -p /srv/wordpress/statics
 ```
 
-2. Edita los ficheros `/etc/hosts` tanto en Windows como en Debian para agregar la dirección IP de la instancia EC2 de AWS y el nombre que aparece en el `docker-compose.yml`.
+2. Edita los ficheros `/etc/hosts` tanto en Windows como en Debian para agregar la dirección IP de la instancia EC2 de AWS y el nombre del host que aparece en el `docker-compose.yml`.
 
    - En Windows, puedes encontrar el archivo en `C:\Windows\System32\drivers\etc\hosts`.
    - En Debian, el archivo se encuentra en `/etc/hosts`.
