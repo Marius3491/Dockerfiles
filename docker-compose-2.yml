@@ -40,3 +40,6 @@ services:
       - "traefik.enable=true"
       # - "traefik.http.routers.apache.entrypoints=http"
       - "traefik.http.routers.apache.rule=Host(`php.otrodominio.internal`)"
+
+      #Cuando entres en traefik apunta las direcciones ip de cada servicio 
+      #y metelas en el fichero hosts junto con los dominios asociados a ellos
