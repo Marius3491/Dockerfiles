@@ -1,0 +1,41 @@
+version: '3'
+
+services:
+  reverse-proxy:
+    image: traefik:v2.10
+    command:
+      - --api.insecure=true
+      - --providers.docker
+      - --providers.docker.exposedbydefault=false
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  whoami:
+    image: traefik/whoami
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.whoami.entrypoints=http"
+      - "traefik.http.routers.whoami.rule=Host(`whoami.midominio.internal`)"
+
+  nginx:
+    image: nginx
+    restart: unless-stopped
+    volumes:
+      - ./web:/usr/share/nginx/html
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.entrypoints=http"
+      - "traefik.http.routers.nginx.rule=Host(`web.midominio.internal`)"
+
+  phpserver:
+    image: php:apache
+    restart: unless-stopped
+    volumes:
+      - ./html:/var/www/html
+    labels:
+      - "traefik.enable=true"
+      # - "traefik.http.routers.apache.entrypoints=http"
+      - "traefik.http.routers.apache.rule=Host(`php.otrodominio.internal`)"
