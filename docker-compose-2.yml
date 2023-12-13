@@ -8,7 +8,8 @@ services:
       - --providers.docker
       - --providers.docker.exposedbydefault=false
     ports:
-      - "80:80"
+      - "80:80" #Inhabilita los servicios que estan usando el puerto 80. sudo systemctl stop apache2
+
       - "8080:8080"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
@@ -24,7 +25,7 @@ services:
     image: nginx
     restart: unless-stopped
     volumes:
-      - ./web:/usr/share/nginx/html
+      - ./web:/usr/share/nginx/html #debes crear la carpeta nginx y dentro la carpeta html antes de lanzar el fichero
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.nginx.entrypoints=http"
